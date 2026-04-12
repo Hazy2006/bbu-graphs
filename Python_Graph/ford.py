@@ -11,11 +11,11 @@ def ford(graph, s, t):
     if t not in vertices:
         return "invalid_vertex", None
 
-    dist = {};
-    prev = {};
+    dist = {}
+    prev = {}
     for x in graph.parse_vertices():
-        dist[x] = float('inf');
-    dist[s] = 0;
+        dist[x] = float('inf')
+    dist[s] = 0
     changed = True
     iteration = 0
     while changed:
@@ -28,7 +28,7 @@ def ford(graph, s, t):
                    prev[y] = x
                    changed = True
         if iteration == graph.count_vertices():
-            return "negative cycle", None # there exists a negative cost cycle
+            return "negative_cycle", None # there exists a negative cost cycle
     if dist[t] == float('inf'):
         return "no_path", None #t is unreachable from s
     path = []

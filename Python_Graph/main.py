@@ -1,6 +1,6 @@
 from Graph import Graph, read_from_file, write_to_file, random_graph
 from connected_components import connected_components
- 
+from ford import ford
  
 def main():
     g = Graph(0)
@@ -21,6 +21,7 @@ def main():
         print("13. Parse inbound")
         print("14. Generate random graph")
         print("15. Find connected components (BFS)")
+        print("16. Bellman-Ford algorithm")
         print("0.  Exit")
  
         choice = int(input("Choice: "))
@@ -116,7 +117,18 @@ def main():
             for i, comp in enumerate(components):
                 verts = sorted(comp.parse_vertices())
                 print(f"  Component {i + 1}: vertices = {verts}")
- 
- 
+        elif choice == 16:
+            s = int(input("Enter source vertex: "))
+            t = int(input("Enter target vertex: "))
+            result, cost = ford(g,s,t)
+            if result == "invalid_vertex":
+                print("Error: Source or target vertex does not exist in the graph")
+            elif result == "negative_cycle":
+                print("Negative cost cycle detected")
+            elif result == "no_path":
+                print("No path exists between s and t")
+            else:
+                print(f"Path: {result}, Cost: {cost}")
+       
 if __name__ == "__main__":
     main()
